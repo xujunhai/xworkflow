@@ -1,0 +1,26 @@
+{
+  "apiVersion": "",
+  "kind": "workflow",
+  "metadata": {
+    "name":"执行测试任务"
+  },
+  "spec": {
+    "entrypoint": "taskA",
+    "tasks": [
+      {
+        "id": "taskA",
+        "input":{
+          "orderId": "#orderId"
+        }
+      },{
+        "id": "taskB",
+        "dependencies": ["taskA"],
+        "input": "$.taskA.output.order"
+      },{
+        "id": "taskC",
+        "dependencies": ["taskA"],
+        "input": "$.taskA.output.packet"
+      }
+    ]
+  }
+}
